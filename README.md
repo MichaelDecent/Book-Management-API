@@ -53,11 +53,11 @@ Each book in the database has the following attributes:
     - `https://github.com/MichaelDecent/Book-Management-API.git`
       
 2. Navigate to the project directory:
-    - `cd book-crud-api`
+    - `cd Book-Management-API`
       
 3. Create a virtual environment and activate it:   
-  - `python -m venv env`
-  - `source env/bin/activate`  # On Windows, use `env\Scripts\activate`
+  - `python -m venv dev-env`
+  - `source dev-env/bin/activate`  # On Windows, use `dev-env\Scripts\activate`
     
 4. Install the required dependencies:
 
