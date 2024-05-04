@@ -77,15 +77,19 @@ Each book in the database has the following attributes:
 
 1. Build the Docker image:
 
-  - `docker build -t book-crud-api` 
+  - `make build` 
 
 
 2. Run the Docker container:
 
-  - `docker run -d --name book-api -p 8000:8000 book-crud-api`
+  - `make run`
 
 
 3. Open your web browser and go to `http://localhost:8000/docs` to access the Swagger documentation and interact with the API.
+
+
+4. Stop the Docker container:
+   - `make stop`
 
 ## Testing
 
