@@ -68,7 +68,7 @@ Each book in the database has the following attributes:
 
 1. Start the development server:
 
-    - `uvicorn main:app --reload`
+    - `fastapi dev app/main.py`
 
 
 2. Open your web browser and go to `http://localhost:8000/docs` to access the Swagger documentation and interact with the API.
