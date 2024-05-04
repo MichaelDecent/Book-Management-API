@@ -15,5 +15,5 @@ DB_NAME = config("DB_NAME", cast=Secret)
 DATABASE_URL = config(
     "DATABASE_URL",
     cast=DatabaseURL,
-    default=f"sqlite:////sqlite_data/{DB_NAME}",
+    default=f"sqlite:///./sqlite_data/{DB_NAME}",
 )

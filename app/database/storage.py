@@ -3,13 +3,14 @@
 Contains the class DBStorage
 """
 
-from app import db
+from app import database
 from app.database.models.base_model import Base
+from app.database.models.books import Books
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine
-from app.core.config import DATABASE_URL
+from app.config import DATABASE_URL
 
-classes = {}
+classes = {"Books": Books}
 
 
 class DBStorage:
@@ -66,6 +67,20 @@ class DBStorage:
         if cls not in classes.values():
             return None
 
-        all_cls = db.storage.all(cls)
+        all_cls = database.storage.all(cls)
         obj = next((value for value in all_cls.values() if value.id == id), None)
         return obj
+    
+    def update_obj(self, cls, obj_id: int, **kwargs) -> None:
+        """
+        update the object’s attributes as passed in the method’s
+        arguments then commit changes to the database
+        """
+        class_obj = self.find_obj_by(cls, id=obj_id)
+
+        for key, value in kwargs.items():
+            if not hasattr(class_obj, key):
+                raise ValueError
+            setattr(class_obj, key, value)
+
+        self.__session.commit()

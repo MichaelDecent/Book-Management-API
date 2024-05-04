@@ -3,3 +3,8 @@ dev-env
 __pycache__/
 
 .flake8
+
+.env
+
+sqlite_data
+

@@ -2,9 +2,10 @@
 """
 Contains class BaseModel
 """
-from api import models
+from app import database
 from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
+from pydantic import BaseModel as Model
 import uuid
 
 Base = declarative_base()
@@ -37,6 +38,17 @@ class BaseModel:
             del new_dict["_sa_instance_state"]
         return new_dict
 
+    def save(self):
+        """saves a new instance to the storage"""
+        database.storage.new(self)
+        database.storage.save()
+
     def delete(self):
         """delete the current instance from the storage"""
-        models.storage.delete(self)
+        database.storage.delete(self)
+
+
+class PydanticBaseModel(Model):
+    """defines the model of the class Base Model"""
+
+    id: str
