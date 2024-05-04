@@ -77,19 +77,20 @@ Each book in the database has the following attributes:
 
 1. Build the Docker image:
 
-  - `make build` 
+ - `make build` 
 
 
 2. Run the Docker container:
 
-  - `make run`
+ - `make run`
 
 
 3. Open your web browser and go to `http://localhost:8000/docs` to access the Swagger documentation and interact with the API.
 
 
 4. Stop the Docker container:
-   - `make stop`
+
+ - `make stop`
 
 ## Testing
 
