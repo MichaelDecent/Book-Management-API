@@ -10,7 +10,7 @@ def get_book_or_raise_exception(book_id: str) -> Books:
     book = storage.get(Books, book_id)
     if not book:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Book ID"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Book Not Found"
         )
     return book
 
@@ -21,8 +21,8 @@ async def retrieve_all_books() -> List[BooksOut]:
     return storage.all(Books)
 
 
-@router.get("/{book_id}/", response_model=BooksOut, status_code=status.HTTP_200_OK)
-async def retrieve_a_book(book_id: str) -> BooksOut:
+@router.get("/{book_id}", response_model=BooksOut, status_code=status.HTTP_200_OK)
+async def retrieve_a_book(book_id: str) -> Dict:
     """Retrieve information about a specific book"""
     return get_book_or_raise_exception(book_id)
 
@@ -35,8 +35,8 @@ async def create_book(book_data: BooksIn) -> BooksOut:
     return new_book
 
 
-@router.put("/{book_id}", status_code=status.HTTP_200_OK)
-async def update_book(book_id: str, book_data: BooksIn):
+@router.put("/{book_id}", status_code=status.HTTP_200_OK, response_model=BooksOut)
+async def update_book(book_id: str, book_data: BooksIn) -> Dict:
     """Update information about an existing book"""
     book = get_book_or_raise_exception(book_id)
     for key, value in book_data.model_dump().items():
