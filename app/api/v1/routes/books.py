@@ -18,7 +18,7 @@ def get_book_or_raise_exception(book_id: str) -> Books:
 @router.get("/", status_code=status.HTTP_200_OK)
 async def retrieve_all_books() -> List[BooksOut]:
     """Retrieve a list of all books."""
-    return storage.all(Books).values()
+    return storage.all(Books)
 
 
 @router.get("/{book_id}/", response_model=BooksOut, status_code=status.HTTP_200_OK)

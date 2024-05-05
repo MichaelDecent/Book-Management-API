@@ -25,15 +25,11 @@ class DBStorage:
         self.__engine = create_engine(str(DATABASE_URL))
 
     def all(self, cls=None):
-        """query on the current database session"""
-        new_dict = {}
+        """retrieve a list all obj of a class on the current database session"""
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    new_dict[key] = obj
-        return new_dict
+        return [obj for obj in objs]
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -68,19 +64,5 @@ class DBStorage:
             return None
 
         all_cls = database.storage.all(cls)
-        obj = next((value for value in all_cls.values() if value.id == id), None)
+        obj = next((value for value in all_cls if value.id == id), None)
         return obj
-    
-    def update_obj(self, cls, obj_id: int, **kwargs) -> None:
-        """
-        update the object’s attributes as passed in the method’s
-        arguments then commit changes to the database
-        """
-        class_obj = self.find_obj_by(cls, id=obj_id)
-
-        for key, value in kwargs.items():
-            if not hasattr(class_obj, key):
-                raise ValueError
-            setattr(class_obj, key, value)
-
-        self.__session.commit()

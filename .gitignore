@@ -2,9 +2,13 @@ dev-env
 
 __pycache__/
 
+.pytest_cache
+
 .flake8
 
 .env
+
+.env.test
 
 sqlite_data
 
