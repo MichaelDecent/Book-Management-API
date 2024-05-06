@@ -50,7 +50,7 @@ Each book in the database has the following attributes:
 ### Installation
 
 1. Clone the repository:
-    - `https://github.com/MichaelDecent/Book-Management-API.git`
+    - `git clone https://github.com/MichaelDecent/Book-Management-API.git`
       
 2. Navigate to the project directory:
     - `cd Book-Management-API`
